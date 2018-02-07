@@ -269,7 +269,7 @@ export class GitError {
 			this.error = void 0;
 		}
 
-		this.message = this.message || data.message || 'Git error';
+		this.message = this!.message || data.message || 'Git error';
 		this.stdout = data.stdout;
 		this.stderr = data.stderr;
 		this.exitCode = data.exitCode;
