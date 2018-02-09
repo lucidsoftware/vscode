@@ -134,11 +134,10 @@ export function fork(
 	logger.info('Forking TSServer', `PATH: ${newEnv['PATH']}`);
 
 	const bootstrapperPath = require.resolve('./electronForkStart');
-	childProcess = cp.fork(bootstrapperPath, [modulePath].concat(args), {
-		silent: true,
+	// tslint:disable-next-line:no-unexternalized-strings
+	childProcess = cp.spawn("/usr/local/bin/node", (options.execArgv ? options.execArgv : []).concat([bootstrapperPath, modulePath]).concat(args), {
 		cwd: options.cwd,
 		env: newEnv,
-		execArgv: options.execArgv
 	});
 
 	childProcess.once('error', (err: Error) => {
