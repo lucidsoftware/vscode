@@ -61,7 +61,8 @@ export class TypeScriptServerSpawner {
 	private getForkOptions() {
 		const debugPort = TypeScriptServerSpawner.getDebugPort();
 		const tsServerForkOptions: electron.ForkOptions = {
-			execArgv: debugPort ? [`--inspect=${debugPort}`] : [],
+			// tslint:disable-next-line:no-unexternalized-strings
+			execArgv: ["--max_old_space_size=8192", "--expose-gc"].concat(debugPort ? [`--inspect=${debugPort}`] : []),
 		};
 		return tsServerForkOptions;
 	}

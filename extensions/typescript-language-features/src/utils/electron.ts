@@ -49,10 +49,9 @@ export function fork(
 	options: ForkOptions,
 ): cp.ChildProcess {
 	const newEnv = generatePatchedEnv(process.env, modulePath);
-	return cp.fork(modulePath, args, {
-		silent: true,
+	// tslint:disable-next-line:no-unexternalized-strings
+	return cp.spawn("node", (options.execArgv ? options.execArgv : []).concat([modulePath]).concat(args), {
 		cwd: options.cwd,
 		env: newEnv,
-		execArgv: options.execArgv
 	});
 }
