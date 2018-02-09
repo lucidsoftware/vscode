@@ -378,7 +378,8 @@ export default class TypeScriptServiceClient extends Disposable implements IType
 				const tsServerForkArgs = await this.getTsServerArgs(currentVersion);
 				const debugPort = this.getDebugPort();
 				const tsServerForkOptions: electron.IForkOptions = {
-					execArgv: debugPort ? [`--inspect=${debugPort}`] : [] // [`--debug-brk=5859`]
+					// tslint:disable-next-line:no-unexternalized-strings
+					execArgv: ["--max_old_space_size=4096", "--expose-gc"].concat(debugPort ? [`--inspect=${debugPort}`] : []) // [`--debug-brk=5859`]
 				};
 				electron.fork(currentVersion.tsServerPath, tsServerForkArgs, tsServerForkOptions, this.logger, (err: any, childProcess: cp.ChildProcess | null) => {
 					if (err || !childProcess) {
