@@ -20,6 +20,7 @@
 	"urlProtocol": "code-oss",
 	"extensionAllowedProposedApi": [
 		"ms-vscode.references-view",
+		"ms-vsliveshare.vsliveshare",
 		"ms-vscode.node-debug",
 		"ms-vscode.node-debug2"
 	],
